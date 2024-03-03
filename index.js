@@ -14,6 +14,7 @@ const bot = new TelegramBot(TOKEN, {
     }
 })
 
+/* Обработка сообщений 
 bot.on('message', (msg) => {
     const { id } = msg.chat
 
@@ -25,6 +26,19 @@ bot.on('message', (msg) => {
             console.error(error)
         })
 
+}) */
+
+/* Обработка команд */
+bot.onText(/\/start/, msg => {
+    const { id } = msg.chat
+
+    bot.sendMessage(id, debug(msg))
+})
+
+bot.onText(/\/help (.+)/, (msg, [source, match]) => {
+    const { id } = msg.chat
+
+    bot.sendMessage(id, debug(match))
 })
 
 function debug(obj = {}) {
